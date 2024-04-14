@@ -1,18 +1,7 @@
 <?php
 session_start();
 
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'pencucian';
-
-$conn = mysqli_connect($hostname, $username, $password, $database);
-
-// pengecekan conn
-if (!$conn) {
-    echo('conn database gagal');
-    exit;
-}
+require 'koneksi.php';
 
 // Cek apakah cookie 'ingat_saya' sudah ada
 if (isset($_COOKIE['ingat_saya'])) {

@@ -1,18 +1,7 @@
 <?php
 session_start();
 
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'pencucian';
-
-$conn = mysqli_connect($hostname, $username, $password, $database);
-
-// pengecekan koneksi
-if (!$conn) {
-    echo('koneksi database gagal');
-    exit;
-}
+require 'koneksi.php';
 
 // cek cookie
 if (!isset($_COOKIE['ingat_saya'])) {
@@ -26,6 +15,7 @@ if(isset($_SESSION['sudah_login'])) {
   $_SESSION['sudah_login'] == true; 
   echo "<script>alert('Harap login terlebih dahulu!')</script>";
   echo "<script>window.location.href = '../index.php';</script>"; 
+  exit;
 }
 
 // Eksekusi kueri SQL
@@ -118,7 +108,7 @@ $result = mysqli_query($conn, $sql);
                                 }
 
                                 echo "<td>" . $status_label . "</td>";
-                                echo "<td><a href=\"../pages/edit-cucian.php?plat_kendaraan=" . $data['plat_kendaraan'] . "\">Edit</a></td>";
+                                echo "<td><a href=\"./edit-cucian.php?plat_kendaraan=" . $data['plat_kendaraan'] . "\">Edit</a></td>";
                                 echo "</tr>";
                                 $no++;
                             }

@@ -1,17 +1,6 @@
 <?php
 
-$hostname = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$database = 'pencucian';
-
-$conn = mysqli_connect($hostname, $db_username, $db_password, $database);
-
-// pengecekan koneksi
-if (!$conn) {
-    echo 'koneksi database gagal';
-    exit;
-}
+require './pages/koneksi.php';
 
 // Ambil data dari form pendaftaran
 if (isset($_POST['submit'])) {
@@ -19,21 +8,32 @@ if (isset($_POST['submit'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    // Query untuk memasukkan data pelanggan baru ke dalam database dengan prepared statement
-    $sql = "INSERT INTO pelanggan (nama_pelanggan, username, password) VALUES (?, ?, ?)";
-    $stmt = mysqli_stmt_init($conn);
-    if (mysqli_stmt_prepare($stmt, $sql)) {
-        mysqli_stmt_bind_param($stmt, "sss", $nama_pelanggan, $username, $password);
-        mysqli_stmt_execute($stmt);
+    // Query untuk memeriksa apakah username sudah terdaftar
+    $check_username_query = "SELECT * FROM pelanggan WHERE username = '$username'";
+    $check_username_result = mysqli_query($conn, $check_username_query);
 
-        echo "<script>alert('Data berhasil ditambah')</script>";
-        header('Location: ./pages/pilih-role.php');
-        exit;
+    if (mysqli_num_rows($check_username_result) > 0) {
+        // Jika username sudah terdaftar, tampilkan pesan kesalahan
+        echo "<script>alert('Username sudah terdaftar')</script>";
     } else {
-        echo "<script>alert('Gagal menambah data')</script>";
+        // Jika username belum terdaftar, lakukan pendaftaran
+        // Query untuk memasukkan data pelanggan baru ke dalam database dengan prepared statement
+        $sql = "INSERT INTO pelanggan (nama_pelanggan, username, password) VALUES (?, ?, ?)";
+        $stmt = mysqli_stmt_init($conn);
+        if (mysqli_stmt_prepare($stmt, $sql)) {
+            mysqli_stmt_bind_param($stmt, "sss", $nama_pelanggan, $username, $password);
+            mysqli_stmt_execute($stmt);
+
+            echo "<script>alert('Data berhasil ditambah')</script>";
+            header('Location: ./pages/pilih-role.php');
+            exit;
+        } else {
+            echo "<script>alert('Gagal menambah data')</script>";
+        }
+
+        mysqli_stmt_close($stmt);
     }
 
-    mysqli_stmt_close($stmt);
     mysqli_close($conn);
 }
 ?>

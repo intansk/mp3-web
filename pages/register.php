@@ -124,7 +124,6 @@ if (!isset($_COOKIE['ingat_saya'])) {
                         </div>
                     </div>
 
-
                     <!-- our review -->
                     <div class="row">
                         <div class="col-md-12 grid-margin stretch-card">

@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Kuma Car Spa</title>
         <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
+        <link rel="shortcut icon" href="../images/favicon.png" />
 
         <style>
             .role-main{

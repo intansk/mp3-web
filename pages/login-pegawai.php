@@ -1,17 +1,7 @@
 <?php
-$hostname = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$database = 'pencucian';
-
 session_start();
-$conn = mysqli_connect($hostname, $db_username, $db_password, $database);
 
-// pengecekan conn
-if (!$conn) {
-  echo('Koneksi database gagal');
-  exit;
-}
+require 'koneksi.php';
 
 if (isset($_POST['submit'])) {
   $username = $_POST['username_pegawai'];

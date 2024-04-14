@@ -1,19 +1,6 @@
 <?php
 session_start();
 
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'pencucian';
-
-$conn = mysqli_connect($hostname, $username, $password, $database);
-
-// pengecekan koneksi
-if (!$conn) {
-    echo('koneksi database gagal');
-    exit;
-}
-
 // cek cookie
 if (!isset($_COOKIE['ingat_saya'])) {
 } else {
@@ -28,10 +15,9 @@ if(isset($_SESSION['sudah_login'])) {
   echo "<script>window.location.href = '../index.php';</script>"; 
 }
 
+require 'koneksi.php';
 
-// Eksekusi kueri SQL
 $sql = "SELECT * FROM layanan";
-
 $result = mysqli_query($conn, $sql);
 ?>
 
