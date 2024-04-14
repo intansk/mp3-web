@@ -1,3 +1,1 @@
-<code> 
-kuma.wuaze.com
-</code>
+[Kuma Car Spa](http://kuma.wuaze.com/)
