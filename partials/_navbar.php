@@ -30,7 +30,7 @@
                         <img src="../images/faces/face11.jpg" alt="profile"/>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item">
+                        <a class="dropdown-item" href="#" id="logoutBtn">
                             <i class="ti-power-off text-primary"></i>Logout
                         </a>
                     </div>
@@ -41,6 +41,14 @@
         </div>
     </nav>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+        var confirmLogout = confirm('Apakah Anda yakin ingin logout?');
+        window.location.href = '../index.php';
+
+    });
+</script>
 
 </body>
 </html>

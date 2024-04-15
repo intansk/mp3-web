@@ -19,25 +19,29 @@ if(isset($_SESSION['sudah_login'])) {
 
 if (isset($_POST['submit'])) {
     $nama_pegawai = $_POST['nama_pegawai'];
-    $nama_pelanggan = $_POST['nama_pelanggan'];
-    $nama_layanan = $_POST['nama_layanan'];
     $plat_kendaraan = $_POST['plat_kendaraan'];
+    $nama_layanan = $_POST['nama_layanan'];
   
-    $sql = "INSERT INTO
-      transaksi (pelanggan_kode_pelanggan, pegawai_kode_pegawai, layanan_kode_layanan, kendaraan_plat_kendaraan)
-      VALUES ('$nama_pelanggan', '$nama_pegawai', '$nama_layanan', '$plat_kendaraan')";
+    // Cari nama pelanggan berdasarkan plat kendaraan
+    $sql = "SELECT nama_pelanggan FROM pelanggan p JOIN kendaraan k ON p.id_pelanggan = k.kode_pelanggan WHERE k.plat_kendaraan = '$plat_kendaraan'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $nama_pelanggan = $row['nama_pelanggan'];
+    
+    // Masukkan data ke dalam tabel transaksi
+    $sql = "INSERT INTO transaksi (pelanggan_kode_pelanggan, pegawai_kode_pegawai, layanan_kode_layanan, kendaraan_plat_kendaraan)
+            VALUES ((SELECT id_pelanggan FROM pelanggan WHERE nama_pelanggan = '$nama_pelanggan'), '$nama_pegawai', '$nama_layanan', '$plat_kendaraan')";
     
     $result = mysqli_query($conn, $sql);
   
     if ($result == true) {
-      echo "<script>alert('Data berhasil ditambah')</script>";
-      echo "<script>window.location.href = './lihat-cucian.php'</script>";
+        echo "<script>alert('Data berhasil ditambah')</script>";
+        echo "<script>window.location.href = './lihat-cucian.php'</script>";
     } else {
-      echo "<script>alert('Gagal menambah data')</script>";
-      echo "<script>window.location.reload()</script>";
+        echo "<script>alert('Gagal menambah data')</script>";
+        echo "<script>window.location.reload()</script>";
     }
-  }
-
+}
 ?>
 
 
@@ -83,19 +87,6 @@ if (isset($_POST['submit'])) {
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<option value='" . $row['id_pegawai'] . "'>" . $row['nama_pegawai'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="nama_pelanggan">Nama Pelanggan</label>
-                      <select class="form-control" id="nama_pelanggan" name="nama_pelanggan">
-                        <?php
-                        $sql = "SELECT id_pelanggan, nama_pelanggan FROM pelanggan";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='" . $row['id_pelanggan'] . "'>" . $row['nama_pelanggan'] . "</option>";
                         }
                         ?>
                     </select>

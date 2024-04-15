@@ -49,7 +49,7 @@
 
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#pembayaran" aria-expanded="false" aria-controls="pembayaran">
-                <i class="mdi mdi-poll menu-icon"></i>
+                <i class="mdi mdi-cash-multiple menu-icon"></i>
                 <span class="menu-title">Pembayaran</span>
                 <i class="menu-arrow"></i>
             </a>

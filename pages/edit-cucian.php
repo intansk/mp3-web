@@ -65,7 +65,7 @@ if (isset($_GET['plat_kendaraan'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>Kuma Car Spa</title>
 
   <link rel="stylesheet" href="../vendors/feather/feather.css">
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
@@ -95,23 +95,31 @@ if (isset($_GET['plat_kendaraan'])) {
                   <form class="forms-sample" action="edit-cucian.php" method="POST">
                     <div class="form-group">
                       <label for="plat_kendaraan">Plat Kendaraan</label>
-                      <input type="text" class="form-control" id="plat_kendaraan" name="plat_kendaraan" value="<?php echo $row['plat_kendaraan']; ?>">
+                      <input readonly type="text" class="form-control" id="plat_kendaraan" name="plat_kendaraan" value="<?php echo $row['plat_kendaraan']; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="penanggung_jawab">Penanggung Jawab</label>
-                      <input type="text" class="form-control" name="nama_pegawai" id="nama_pegawai" value="<?php echo $row['nama_pegawai']; ?>">
+                      <label for="nama_pegawai">Penanggung Jawab</label>
+                      <input readonly type="text" class="form-control" name="nama_pegawai" id="nama_pegawai" value="<?php echo $row['nama_pegawai']; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="jenis_kendaraan">Jenis Kendaraan</label>
-                      <input type="text" class="form-control" name="jenis_kendaraan" id="jenis_kendaraan" value="<?php echo $row['jenis_kendaraan']; ?>" >
+                      <label for="jenis_kendaraan" >Jenis Kendaraan</label>
+                      <input readonly type="text" class="form-control" name="jenis_kendaraan" id="jenis_kendaraan" value="<?php echo $row['jenis_kendaraan']; ?>">
                     </div>
                     <div class="form-group">
                       <label for="merek">Merek</label>
-                      <input type="text" class="form-control" name="merek" id="merek" value="<?php echo $row['merek']; ?>">
+                      <input readonly type="text" class="form-control" name="merek" id="merek" value="<?php echo $row['merek']; ?>">
                     </div>
                     <div class="form-group">
                       <label for="layanan">Layanan</label>
-                      <input type="text" class="form-control" name="layanan" id="layanan" value="<?php echo $row['nama_layanan']; ?>">
+                      <select class="form-control" name="layanan" id="layanan">
+                        <?php
+                          $layanan_query = mysqli_query($conn, "SELECT * FROM layanan");
+                          while ($layanan_data = mysqli_fetch_array($layanan_query)) {
+                            $selected = ($layanan_data['nama_layanan'] == $row['nama_layanan']) ? 'selected' : '';
+                            echo "<option value='" . $layanan_data['nama_layanan'] . "' $selected>" . $layanan_data['nama_layanan'] . "</option>";
+                          }
+                        ?>
+                      </select>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2" name="submit">Simpan</button>
                   </form>
