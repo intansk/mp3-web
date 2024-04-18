@@ -10,7 +10,7 @@ if (isset($_COOKIE['ingat_saya'])) {
 
 // Cek session login
 if (!isset($_SESSION['sudah_login'])) {
-  header('Location: ../samples/register.php');
+    echo "<script>window.location.href = '../index.php';</script>"; 
   exit;
 }
 

@@ -3,7 +3,6 @@ session_start();
 
 // cek cookie
 if (!isset($_COOKIE['ingat_saya'])) {
-} else {
   $_SESSION['sudah_login'] = true;
 }
 

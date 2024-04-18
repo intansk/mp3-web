@@ -11,7 +11,7 @@ if (!isset($_COOKIE['ingat_saya'])) {
   
   // cek session
   if(isset($_SESSION['sudah_login'])) {
-    // echo "<script>alert('Session sudah diset untuk pelanggan.')</script>";
+    echo "<script>alert('Selamat datang!')</script>";
   } else {
     $_SESSION['sudah_login'] == true; 
     echo "<script>alert('Harap login terlebih dahulu!')</script>";
