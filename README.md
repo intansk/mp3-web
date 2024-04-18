@@ -1,1 +1,1 @@
-[Kuma Car Spa](http://kuma.wuaze.com/)
+[Kuma Car Spa](https://kuma.wuaze.com/)
